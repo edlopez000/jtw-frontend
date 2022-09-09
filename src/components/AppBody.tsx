@@ -1,5 +1,5 @@
 import { Content } from 'antd/lib/layout/layout';
-import SignIn from './SignIn';
+import { Outlet } from 'react-router-dom';
 
 function AppBody() {
   return (
@@ -10,7 +10,7 @@ function AppBody() {
         alignItems: 'center',
       }}
     >
-      <SignIn />
+      <Outlet />
     </Content>
   );
 }
