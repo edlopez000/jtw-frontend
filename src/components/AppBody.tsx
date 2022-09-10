@@ -7,7 +7,6 @@ function AppBody() {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
       }}
     >
       <Outlet />
