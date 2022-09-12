@@ -1,11 +1,27 @@
 import { Button, Form, Input, Space, Typography } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { axiosPrivate } from '../api/axiosPrivate';
 
 const { Title, Text } = Typography;
 
 function Login() {
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
+  const navigate = useNavigate();
+
+  const onFinish = async (values: any) => {
+    const res = await axiosPrivate.post('/auth/login', {
+      email: values.email,
+      password: values.password,
+    });
+
+    localStorage.setItem(
+      'session',
+      JSON.stringify({
+        accessToken: res.data?.accessToken,
+        refreshToken: res.data?.refreshToken,
+      })
+    );
+
+    navigate('../user');
   };
 
   const onFinishFailed = (errorInfo: any) => {
