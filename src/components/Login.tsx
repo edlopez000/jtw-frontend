@@ -13,6 +13,7 @@ function Login() {
       password: values.password,
     });
 
+    // Good opportunity to make this into a hook that takes in the response data from an endpoint
     localStorage.setItem(
       'session',
       JSON.stringify({
