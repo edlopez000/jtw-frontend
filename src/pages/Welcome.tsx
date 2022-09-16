@@ -3,9 +3,16 @@ import { Space, Typography } from 'antd';
 
 const { Title, Text } = Typography;
 
-function LoginPage() {
+function Welcome() {
   return (
-    <Space direction="vertical" align="center">
+    <Space
+      direction="vertical"
+      align="center"
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <Title style={{ textAlign: 'center' }}>Howdy!</Title>
       <Text>
         Welcome to a small practice app where I explore JSON Web Token for
@@ -16,4 +23,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default Welcome;

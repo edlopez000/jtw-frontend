@@ -1,28 +1,14 @@
 import { Button, Form, Input, Space, Typography } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import { axiosPrivate } from '../api/axiosPrivate';
+import { Link } from 'react-router-dom';
+import useAuth from '../utils/useAuth';
 
 const { Title, Text } = Typography;
 
 function Login() {
-  const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   const onFinish = async (values: any) => {
-    const res = await axiosPrivate.post('/auth/login', {
-      email: values.email,
-      password: values.password,
-    });
-
-    // Good opportunity to make this into a hook that takes in the response data from an endpoint
-    localStorage.setItem(
-      'session',
-      JSON.stringify({
-        accessToken: res.data?.accessToken,
-        refreshToken: res.data?.refreshToken,
-      })
-    );
-
-    navigate('../user');
+    signIn(values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -30,7 +16,14 @@ function Login() {
   };
 
   return (
-    <Space direction="vertical" align="center">
+    <Space
+      direction="vertical"
+      align="center"
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <Typography>
         <Title style={{ textAlign: 'center' }}>Log in</Title>
       </Typography>

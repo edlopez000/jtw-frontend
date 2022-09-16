@@ -1,33 +1,29 @@
 import { Button, Form, Input, Space, Typography } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
-import { axiosPublic } from '../api/axiosPublic';
+import { Link } from 'react-router-dom';
+import useAuth from '../utils/useAuth';
 
 const { Title, Text } = Typography;
 
 function SignUp() {
   const [form] = Form.useForm();
-  const navigate = useNavigate();
+  const { registerUser } = useAuth();
 
   const onFinish = async (values: any) => {
-    const res = await axiosPublic.post('/auth/register', {
-      email: values.email,
-      password: values.password,
-    });
-
-    // Good opportunity to make this into a hook that takes in the response data from an endpoint
-    localStorage.setItem(
-      'session',
-      JSON.stringify({
-        accessToken: res.data?.accessToken,
-        refreshToken: res.data?.refreshToken,
-      })
-    );
-
-    navigate('../user');
+    registerUser(values);
   };
 
+  const onFinishFailed = (errorInfo: any) => {
+    console.log('Failed:', errorInfo);
+  };
   return (
-    <Space direction="vertical" align="center">
+    <Space
+      direction="vertical"
+      align="center"
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
       <Typography>
         <Title style={{ textAlign: 'center' }}>Sign up</Title>
       </Typography>
@@ -38,6 +34,7 @@ function SignUp() {
         form={form}
         name="register"
         onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
         scrollToFirstError
       >
         <Form.Item

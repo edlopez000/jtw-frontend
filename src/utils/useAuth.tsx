@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { axiosPrivate } from '../api/axiosPrivate';
-import { User } from '../interfaces/User.interface';
 import { IAuthContext } from '../interfaces/AuthContext.interface';
-import { setLocalStorage } from './setLocalStorage';
+import { User } from '../interfaces/User.interface';
+import { removeLocalStorage, setLocalStorage } from './localStorage.utils';
 
 export const AuthContext = createContext<Partial<IAuthContext>>({});
 
@@ -67,6 +67,7 @@ export const AuthProvider = ({
       .then((data) => data.data)
       .then(({ accessToken, refreshToken }) => {
         setLocalStorage('session', { accessToken, refreshToken });
+        setUserInfo();
         navigate('../user');
       })
       .catch((error) => setError(error))
@@ -75,17 +76,24 @@ export const AuthProvider = ({
 
   const registerUser = async (values: { email: string; password: string }) => {
     return await axiosPrivate
-      .post('/auth/login', {
+      .post('/auth/register', {
         email: values.email,
         password: values.password,
       })
       .then((data) => data.data)
       .then(({ accessToken, refreshToken }) => {
         setLocalStorage('session', { accessToken, refreshToken });
+        setUserInfo();
         navigate('../user');
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
+  };
+
+  const logout = () => {
+    removeLocalStorage('session');
+    setUser(null);
+    navigate('/');
   };
 
   const memoizedValue = useMemo(
@@ -96,6 +104,7 @@ export const AuthProvider = ({
       setUserInfo,
       signIn,
       registerUser,
+      logout,
     }),
     [user, loading, error]
   );

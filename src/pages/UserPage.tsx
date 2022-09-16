@@ -1,31 +1,19 @@
 import { Space, Typography } from 'antd';
-import { useEffect, useState } from 'react';
-import { axiosPrivate } from '../api/axiosPrivate';
+import useAuth from '../utils/useAuth';
 
-const { Text, Title } = Typography;
-
-interface User {
-  id: string;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
-}
+const { Title, Text } = Typography;
 
 function UserPage() {
-  const [user, setUser] = useState<User>();
-
-  const setUserInfo = async () => {
-    const res: any = await axiosPrivate.get('users/profile');
-    setUser(res.data);
-  };
-
-  useEffect(() => {
-    setUserInfo();
-  }, []);
+  const { user } = useAuth();
 
   return (
     <div>
-      <Typography>
+      <Typography
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
         <Space direction="vertical">
           <Title>Current User Info</Title>
           <Text>User ID: {user && user.id}</Text>

@@ -13,4 +13,5 @@ export interface IAuthContext {
     email: string;
     password: string;
   }) => void;
+  logout?: () => void;
 }

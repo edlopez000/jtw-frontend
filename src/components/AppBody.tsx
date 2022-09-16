@@ -3,12 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 function AppBody() {
   return (
-    <Content
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
+    <Content>
       <Outlet />
     </Content>
   );
