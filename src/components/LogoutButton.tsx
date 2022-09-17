@@ -9,7 +9,7 @@ function LogoutButton() {
       {user ? (
         <Button
           onClick={() => {
-            logout();
+            logout ? logout() : console.log('set error');
           }}
         >
           Logout

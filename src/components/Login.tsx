@@ -8,7 +8,7 @@ function Login() {
   const { signIn } = useAuth();
 
   const onFinish = async (values: any) => {
-    signIn(values);
+    signIn ? signIn(values) : console.log('set error here');
   };
 
   const onFinishFailed = (errorInfo: any) => {

@@ -9,7 +9,7 @@ function SignUp() {
   const { registerUser } = useAuth();
 
   const onFinish = async (values: any) => {
-    registerUser(values);
+    registerUser ? registerUser(values) : console.log('goof up on aisle 3');
   };
 
   const onFinishFailed = (errorInfo: any) => {
