@@ -8,8 +8,10 @@ function SignUp() {
   const [form] = Form.useForm();
   const { registerUser } = useAuth();
 
-  const onFinish = async (values: any) => {
-    registerUser ? registerUser(values) : console.log('goof up on aisle 3');
+  const onFinish = (values: any) => {
+    registerUser
+      ? registerUser(values)
+      : console.log('Error while Registering User');
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -94,14 +96,21 @@ function SignUp() {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            onSubmit={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+            }}
+          >
             Register
           </Button>
         </Form.Item>
       </Form>
       <Text>
         Already have an account?
-        <Link to="../login"> Log in.</Link>
+        <Link to="/login"> Log in.</Link>
       </Text>
     </Space>
   );

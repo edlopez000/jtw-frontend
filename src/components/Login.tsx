@@ -5,10 +5,10 @@ import useAuth from '../utils/useAuth';
 const { Title, Text } = Typography;
 
 function Login() {
-  const { signIn } = useAuth();
+  const { signIn, loading } = useAuth();
 
   const onFinish = async (values: any) => {
-    signIn ? signIn(values) : console.log('set error here');
+    signIn ? signIn(values) : console.log('Sign In Error');
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -53,14 +53,22 @@ function Login() {
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={loading}
+            onSubmit={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+            }}
+          >
             Submit
           </Button>
         </Form.Item>
       </Form>
       <Text style={{ textAlign: 'center' }}>
         Need an account?
-        <Link to="../signup"> Sign up here.</Link>
+        <Link to="/signup"> Sign up here.</Link>
       </Text>
     </Space>
   );
