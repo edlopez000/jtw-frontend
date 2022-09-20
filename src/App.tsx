@@ -8,9 +8,9 @@ import AppHeader from './components/AppHeader';
 import { AuthenticatedRoute } from './components/AuthenticatedRoute';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-import Welcome from './pages/Welcome';
 import NotFound from './pages/NotFound';
 import UserPage from './pages/UserPage';
+import Welcome from './pages/Welcome';
 import useAuth, { AuthProvider } from './utils/useAuth';
 
 function App() {
@@ -29,9 +29,14 @@ function App() {
                 <Route path="/" element={<Welcome />} />
                 <Route path="login" element={<Login />} />
                 <Route path="signup" element={<SignUp />} />
-                <Route element={<AuthenticatedRoute />}>
-                  <Route path="user" element={<UserPage />} />
-                </Route>
+                <Route
+                  path="user"
+                  element={
+                    <AuthenticatedRoute>
+                      <UserPage />
+                    </AuthenticatedRoute>
+                  }
+                />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
