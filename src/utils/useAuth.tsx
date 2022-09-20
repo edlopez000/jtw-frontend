@@ -9,7 +9,6 @@ export const AuthContext = createContext<Partial<IAuthContext>>({});
 
 export const AuthProvider = ({
   children,
-  value,
 }: {
   children: React.ReactNode;
   value: IAuthContext;
@@ -34,7 +33,7 @@ export const AuthProvider = ({
       .then((data) => data.data)
       .then((user: User) => {
         setUser(user);
-        navigate('../user');
+        navigate('/user');
       })
       .catch((error) => {
         setError(error);
@@ -50,7 +49,7 @@ export const AuthProvider = ({
       .then((data) => data.data)
       .then((data: User) => {
         setUser(data);
-        navigate('../user');
+        navigate('/user');
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
@@ -68,13 +67,15 @@ export const AuthProvider = ({
       .then(({ accessToken, refreshToken }) => {
         setLocalStorage('session', { accessToken, refreshToken });
         setUserInfo();
-        navigate('../user');
+        navigate('/user');
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   };
 
   const registerUser = async (values: { email: string; password: string }) => {
+    setLoading(true);
+
     return await axiosPrivate
       .post('/auth/register', {
         email: values.email,
@@ -84,7 +85,7 @@ export const AuthProvider = ({
       .then(({ accessToken, refreshToken }) => {
         setLocalStorage('session', { accessToken, refreshToken });
         setUserInfo();
-        navigate('../user');
+        navigate('/user');
       })
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
