@@ -36,7 +36,7 @@ export const AuthProvider = ({
         navigate('/user');
       })
       .catch((error) => {
-        setError(error);
+        setError(error.response.data.message);
       })
       .finally(() => setLoadingInitial(false));
   }, []);
@@ -51,7 +51,9 @@ export const AuthProvider = ({
         setUser(data);
         navigate('/user');
       })
-      .catch((error) => setError(error))
+      .catch((error) => {
+        setError(error);
+      })
       .finally(() => setLoading(false));
   };
 
@@ -64,30 +66,34 @@ export const AuthProvider = ({
         password: values.password,
       })
       .then((data) => data.data)
-      .then(({ accessToken, refreshToken }) => {
+      .then(async ({ accessToken, refreshToken }) => {
         setLocalStorage('session', { accessToken, refreshToken });
-        setUserInfo();
+        await setUserInfo();
         navigate('/user');
       })
-      .catch((error) => setError(error))
+      .catch((error) => {
+        setError(error.response.data);
+      })
       .finally(() => setLoading(false));
   };
 
   const registerUser = async (values: { email: string; password: string }) => {
     setLoading(true);
 
-    return await axiosPrivate
+    await axiosPrivate
       .post('/auth/register', {
         email: values.email,
         password: values.password,
       })
       .then((data) => data.data)
-      .then(({ accessToken, refreshToken }) => {
+      .then(async ({ accessToken, refreshToken }) => {
         setLocalStorage('session', { accessToken, refreshToken });
-        setUserInfo();
+        await setUserInfo();
         navigate('/user');
       })
-      .catch((error) => setError(error))
+      .catch((error) => {
+        setError(error.response.data);
+      })
       .finally(() => setLoading(false));
   };
 
