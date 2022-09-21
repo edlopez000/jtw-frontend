@@ -1,11 +1,11 @@
-import { Button, Form, Input, Space, Typography } from 'antd';
+import { Alert, Button, Form, Input, Space, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import useAuth from '../utils/useAuth';
 
 const { Title, Text } = Typography;
 
 function Login() {
-  const { signIn, loading } = useAuth();
+  const { signIn, loading, error } = useAuth();
 
   const onFinish = async (values: any) => {
     signIn ? signIn(values) : console.log('Sign In Error');
@@ -51,6 +51,12 @@ function Login() {
         >
           <Input.Password style={{ width: 304 }} />
         </Form.Item>
+
+        {error?.message ? (
+          <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
+            <Alert type="error" message={error.message} />
+          </Form.Item>
+        ) : null}
 
         <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
           <Button

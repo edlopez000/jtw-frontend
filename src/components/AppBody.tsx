@@ -1,12 +1,11 @@
 import { Content } from 'antd/lib/layout/layout';
 import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import Loading from '../pages/Loading';
 import useAuth from '../utils/useAuth';
 import LogoutButton from './LogoutButton';
 
 function AppBody() {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   const [showLogout, setShowLogout] = useState(false);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ function AppBody() {
 
   return (
     <Content>
-      {loading ? <Loading /> : <Outlet />}
+      <Outlet />
       {showLogout ? <LogoutButton /> : null}
     </Content>
   );

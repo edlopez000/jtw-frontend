@@ -1,4 +1,4 @@
-import { Button, Form, Input, Space, Typography } from 'antd';
+import { Alert, Button, Form, Input, Space, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import useAuth from '../utils/useAuth';
 
@@ -6,7 +6,7 @@ const { Title, Text } = Typography;
 
 function SignUp() {
   const [form] = Form.useForm();
-  const { registerUser } = useAuth();
+  const { registerUser, error } = useAuth();
 
   const onFinish = (values: any) => {
     registerUser
@@ -17,6 +17,7 @@ function SignUp() {
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
+
   return (
     <Space
       direction="vertical"
@@ -94,6 +95,12 @@ function SignUp() {
         >
           <Input.Password />
         </Form.Item>
+
+        {error?.message ? (
+          <Form.Item wrapperCol={{ offset: 9, span: 8 }}>
+            <Alert type="error" message={error.message} />
+          </Form.Item>
+        ) : null}
 
         <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
           <Button
