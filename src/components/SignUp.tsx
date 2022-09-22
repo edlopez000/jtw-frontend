@@ -6,7 +6,7 @@ const { Title, Text } = Typography;
 
 function SignUp() {
   const [form] = Form.useForm();
-  const { registerUser, error } = useAuth();
+  const { registerUser, error, loading } = useAuth();
 
   const onFinish = (values: any) => {
     registerUser
@@ -106,6 +106,7 @@ function SignUp() {
           <Button
             type="primary"
             htmlType="submit"
+            loading={loading}
             onSubmit={(event) => {
               event.preventDefault();
               event.stopPropagation();
