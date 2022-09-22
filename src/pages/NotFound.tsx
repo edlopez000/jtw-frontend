@@ -1,7 +1,5 @@
-import { Button, Result, Space, Typography } from 'antd';
+import { Button, Result, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
-
-const { Title } = Typography;
 
 function NotFound() {
   const navigate = useNavigate();
@@ -17,7 +15,7 @@ function NotFound() {
           status="404"
           title="404"
           subTitle="How'd you get here? This page doesn't exist."
-          extra={<Button onClick={() => navigate(-1)}>GO BACK</Button>}
+          extra={<Button onClick={() => navigate('/user')}>GO HOME</Button>}
         />
       </Space>
     </div>
