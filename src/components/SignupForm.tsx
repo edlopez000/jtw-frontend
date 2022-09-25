@@ -45,11 +45,11 @@ function SignupForm() {
           rules={[
             {
               type: 'email',
-              message: 'The input is not valid E-mail!',
+              message: 'Input is not valid Email!',
             },
             {
               required: true,
-              message: 'Please input your E-mail!',
+              message: 'Input your Email!',
             },
           ]}
         >
@@ -87,9 +87,7 @@ function SignupForm() {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(
-                  new Error('Passwords entered do not match!')
-                );
+                return Promise.reject(new Error('Passwords do not match!'));
               },
             }),
           ]}
@@ -108,7 +106,6 @@ function SignupForm() {
             type="primary"
             htmlType="submit"
             loading={loading}
-            {...formItemLayout}
             onSubmit={(event) => {
               event.preventDefault();
               event.stopPropagation();

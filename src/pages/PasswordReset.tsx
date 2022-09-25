@@ -24,6 +24,12 @@ export const PasswordReset = () => {
       }}
     >
       <Title>Password Change</Title>
+      <Alert
+        type="warning"
+        message="Note: Changing your password will log you out"
+        showIcon
+        closable
+      />
       <Form
         form={form}
         name="password reset"
