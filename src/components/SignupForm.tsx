@@ -1,10 +1,11 @@
 import { Alert, Button, Form, Input, Space, Typography } from 'antd';
 import { Link } from 'react-router-dom';
+import { formItemLayout } from '../utils/antd.utils';
 import useAuth from '../utils/useAuth';
 
 const { Title, Text } = Typography;
 
-function SignUp() {
+function SignupForm() {
   const [form] = Form.useForm();
   const { registerUser, error, loading } = useAuth();
 
@@ -14,8 +15,8 @@ function SignUp() {
       : console.log('Error while Registering User');
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const onFinishFailed = () => {
+    console.log('Failed to Register User');
   };
 
   return (
@@ -31,9 +32,6 @@ function SignUp() {
         <Title style={{ textAlign: 'center' }}>Sign up</Title>
       </Typography>
       <Form
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ width: '35vw' }}
         form={form}
         name="register"
         onFinish={onFinish}
@@ -42,7 +40,8 @@ function SignUp() {
       >
         <Form.Item
           name="email"
-          label="E-mail"
+          label={<Text strong>Email:</Text>}
+          {...formItemLayout}
           rules={[
             {
               type: 'email',
@@ -59,7 +58,8 @@ function SignUp() {
 
         <Form.Item
           name="password"
-          label="Password"
+          label={<Text strong>Password:</Text>}
+          {...formItemLayout}
           rules={[
             {
               required: true,
@@ -73,9 +73,10 @@ function SignUp() {
 
         <Form.Item
           name="confirm"
-          label="Confirm Password"
+          label={<Text strong>Confirm Password:</Text>}
           dependencies={['password']}
           hasFeedback
+          {...formItemLayout}
           rules={[
             {
               required: true,
@@ -97,16 +98,17 @@ function SignUp() {
         </Form.Item>
 
         {error?.message ? (
-          <Form.Item wrapperCol={{ offset: 9, span: 8 }}>
+          <Form.Item {...formItemLayout}>
             <Alert type="error" message={error.message} />
           </Form.Item>
         ) : null}
 
-        <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
+        <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             type="primary"
             htmlType="submit"
             loading={loading}
+            {...formItemLayout}
             onSubmit={(event) => {
               event.preventDefault();
               event.stopPropagation();
@@ -124,4 +126,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default SignupForm;

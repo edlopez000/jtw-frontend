@@ -1,5 +1,6 @@
 import { Alert, Button, Form, Input, Space, Typography } from 'antd';
 import { Link } from 'react-router-dom';
+import { formItemLayout } from '../utils/antd.utils';
 import useAuth from '../utils/useAuth';
 
 const { Title, Text } = Typography;
@@ -11,8 +12,8 @@ function Login() {
     signIn ? signIn(values) : console.log('Sign In Error');
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+  const onFinishFailed = () => {
+    console.log('Failed to Sign In');
   };
 
   return (
@@ -22,43 +23,42 @@ function Login() {
       style={{
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
-      <Typography>
-        <Title style={{ textAlign: 'center' }}>Log in</Title>
-      </Typography>
+      <Title style={{ textAlign: 'center' }}>Log in</Title>
       <Form
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
+        name="login"
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
-          label="Email"
+          label={<Text strong>Email:</Text>}
           name="email"
           rules={[{ required: true, message: 'Please input your email!' }]}
+          {...formItemLayout}
         >
-          <Input style={{ width: 304 }} />
+          <Input />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label={<Text strong>Password</Text>}
           name="password"
           rules={[{ required: true, message: 'Please input your password!' }]}
+          {...formItemLayout}
         >
-          <Input.Password style={{ width: 304 }} />
+          <Input.Password />
         </Form.Item>
 
         {error?.message ? (
-          <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
-            <Alert type="error" message={error.message} />
+          <Form.Item>
+            <Alert type="error" message={error.response.data.message} />
           </Form.Item>
         ) : null}
 
-        <Form.Item wrapperCol={{ offset: 9, span: 16 }}>
+        <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             type="primary"
             htmlType="submit"
