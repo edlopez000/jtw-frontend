@@ -33,10 +33,10 @@ export const AuthProvider = ({
       .then((data) => data.data)
       .then((user: User) => {
         setUser(user);
-        navigate('/user');
+        navigate('/');
       })
       .catch((error) => {
-        setError(error.response.data.message);
+        setError(error);
       })
       .finally(() => setLoadingInitial(false));
   }, []);
@@ -49,7 +49,7 @@ export const AuthProvider = ({
       .then((data) => data.data)
       .then((data: User) => {
         setUser(data);
-        navigate('/user');
+        navigate('/');
       })
       .catch((error) => {
         setError(error);
@@ -69,10 +69,10 @@ export const AuthProvider = ({
       .then(async ({ accessToken, refreshToken }) => {
         setLocalStorage('session', { accessToken, refreshToken });
         await setUserInfo();
-        navigate('/user');
+        navigate('/');
       })
       .catch((error) => {
-        setError(error.response.data);
+        setError(error);
       })
       .finally(() => setLoading(false));
   };
@@ -89,10 +89,10 @@ export const AuthProvider = ({
       .then(async ({ accessToken, refreshToken }) => {
         setLocalStorage('session', { accessToken, refreshToken });
         await setUserInfo();
-        navigate('/user');
+        navigate('/');
       })
       .catch((error) => {
-        setError(error.response.data);
+        setError(error);
       })
       .finally(() => setLoading(false));
   };
