@@ -1,5 +1,4 @@
 import { Layout } from 'antd';
-import 'antd/dist/antd.css';
 import { Content } from 'antd/lib/layout/layout';
 import { Route, Routes } from 'react-router-dom';
 import AppBody from './components/AppBody';
@@ -7,10 +6,11 @@ import AppFooter from './components/AppFooter';
 import AppHeader from './components/AppHeader';
 import { AuthenticatedRoute } from './components/AuthenticatedRoute';
 import Login from './components/Login';
-import SignUp from './components/SignUp';
+import SignupForm from './components/SignupForm';
 import NotFound from './pages/NotFound';
+import PasswordReset from './pages/PasswordReset';
+import SplashPage from './pages/SplashPage';
 import UserPage from './pages/UserPage';
-import Welcome from './pages/Welcome';
 import useAuth, { AuthProvider } from './utils/useAuth';
 
 function App() {
@@ -21,19 +21,27 @@ function App() {
       <AuthProvider
         value={{ user, loading, error, signIn, registerUser, setUserInfo }}
       >
-        <Layout style={{ height: '100vh' }}>
+        <Layout style={{ height: '100vh', width: '100vw' }}>
           <AppHeader />
           <Content>
             <Routes>
               <Route element={<AppBody />}>
-                <Route path="/" element={<Welcome />} />
-                <Route path="login" element={<Login />} />
-                <Route path="signup" element={<SignUp />} />
+                <Route path="/" element={<SplashPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignupForm />} />
                 <Route
-                  path="user"
+                  path="/user"
                   element={
                     <AuthenticatedRoute>
                       <UserPage />
+                    </AuthenticatedRoute>
+                  }
+                />
+                <Route
+                  path="/changepassword"
+                  element={
+                    <AuthenticatedRoute>
+                      <PasswordReset />
                     </AuthenticatedRoute>
                   }
                 />
