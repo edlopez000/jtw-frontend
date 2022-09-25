@@ -97,6 +97,27 @@ export const AuthProvider = ({
       .finally(() => setLoading(false));
   };
 
+  const changePassword = async (values: {
+    currentPassword: string;
+    newPassword: string;
+  }) => {
+    setLoading(true);
+
+    await axiosPrivate
+      .post('/users/changepassword', {
+        password: values.currentPassword,
+        newPassword: values.newPassword,
+      })
+      .then((data) => data.data)
+      .then(() => {
+        logout();
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => setLoading(false));
+  };
+
   const logout = () => {
     removeLocalStorage('session');
     setUser(null);
@@ -111,6 +132,7 @@ export const AuthProvider = ({
       setUserInfo,
       signIn,
       registerUser,
+      changePassword,
       logout,
     }),
     [user, loading, error]

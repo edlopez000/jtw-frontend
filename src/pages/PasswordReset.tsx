@@ -6,10 +6,12 @@ const { Title } = Typography;
 
 export const PasswordReset = () => {
   const [form] = Form.useForm();
-  const { error, loading } = useAuth();
+  const { error, loading, changePassword } = useAuth();
 
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
+  const onFinish = async (values: any) => {
+    changePassword
+      ? changePassword(values)
+      : console.log('changePassword function error');
   };
 
   return (
@@ -30,7 +32,7 @@ export const PasswordReset = () => {
       >
         <Form.Item
           {...formItemLayout}
-          name="password"
+          name="currentPassword"
           label="Current Password"
           rules={[
             {
@@ -45,7 +47,7 @@ export const PasswordReset = () => {
 
         <Form.Item
           {...formItemLayout}
-          name="new password"
+          name="newPassword"
           label="New Password"
           rules={[
             {
@@ -59,9 +61,9 @@ export const PasswordReset = () => {
         </Form.Item>
         <Form.Item
           {...formItemLayout}
-          name="confirm"
+          name="confirmNewPassword"
           label="Confirm New Password"
-          dependencies={['new password']}
+          dependencies={['newPassword']}
           hasFeedback
           rules={[
             {
@@ -70,7 +72,7 @@ export const PasswordReset = () => {
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
-                if (!value || getFieldValue('new password') === value) {
+                if (!value || getFieldValue('newPassword') === value) {
                   return Promise.resolve();
                 }
                 return Promise.reject(

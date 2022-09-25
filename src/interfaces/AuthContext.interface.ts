@@ -13,5 +13,12 @@ export interface IAuthContext {
     email: string;
     password: string;
   }) => void;
+  changePassword?: ({
+    currentPassword,
+    newPassword,
+  }: {
+    currentPassword: string;
+    newPassword: string;
+  }) => void;
   logout?: () => void;
 }
