@@ -1,7 +1,7 @@
-import SignInUpButton from '../components/LogInSignUpButton';
 import { Space, Typography } from 'antd';
+import SignInUpButton from '../components/LogInSignUpButton';
 
-const { Title, Text } = Typography;
+const { Title, Paragraph } = Typography;
 
 function Welcome() {
   return (
@@ -14,10 +14,10 @@ function Welcome() {
       }}
     >
       <Title style={{ textAlign: 'center' }}>Howdy!</Title>
-      <Text>
+      <Paragraph style={{ marginLeft: '15vw', marginRight: '15vw' }}>
         Welcome to a small practice app where I explore JSON Web Token for
         protecting API routes and user authentication.
-      </Text>
+      </Paragraph>
       <SignInUpButton />
     </Space>
   );
