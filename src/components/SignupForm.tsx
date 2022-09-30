@@ -97,7 +97,10 @@ function SignupForm() {
 
         {error?.message ? (
           <Form.Item {...formItemLayout}>
-            <Alert type="error" message={error.message} />
+            <Alert
+              type="error"
+              message={error?.response?.data?.message || error?.message}
+            />
           </Form.Item>
         ) : null}
 

@@ -54,7 +54,10 @@ function Login() {
 
         {error?.message ? (
           <Form.Item>
-            <Alert type="error" message={error.response.data.message} />
+            <Alert
+              type="error"
+              message={error?.response?.data?.message || error?.message}
+            />
           </Form.Item>
         ) : null}
 
