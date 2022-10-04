@@ -12,6 +12,8 @@ specifiers:
   axios: ^0.27.2
   jsdom: ^20.0.0
   mem: ^9.0.2
+  monaco-editor: ^0.34.0
+  monaco-vim: ^0.3.4
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router-dom: ^6.4.1
@@ -26,6 +28,8 @@ dependencies:
   antd: 4.23.2_biqbaboplfbrettd7655fr4n2y
   axios: 0.27.2
   mem: 9.0.2
+  monaco-editor: 0.34.0
+  monaco-vim: 0.3.4_monaco-editor@0.34.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.4.1_biqbaboplfbrettd7655fr4n2y
@@ -1550,6 +1554,18 @@ packages:
 
   /moment/2.29.4:
     resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
+    dev: false
+
+  /monaco-editor/0.34.0:
+    resolution: {integrity: sha512-VF+S5zG8wxfinLKLrWcl4WUizMx+LeJrG4PM/M78OhcwocpV0jiyhX/pG6Q9jIOhrb/ckYi6nHnaR5OojlOZCQ==}
+    dev: false
+
+  /monaco-vim/0.3.4_monaco-editor@0.34.0:
+    resolution: {integrity: sha512-IVogmrQ6fRwW2PD9XRHFysOZBFj8qcRhgabu7GlGiNR14ApKMHz3pYOL1hDq1ctVPj1DS6hZd98vZrFxWr5d6A==}
+    peerDependencies:
+      monaco-editor: '*'
+    dependencies:
+      monaco-editor: 0.34.0
     dev: false
 
   /ms/2.1.2:
