@@ -42,8 +42,14 @@ function TextEditor() {
 
   return (
     <div>
-      <div ref={editorRef} style={{ height: '90vh', width: '90vh' }} />
-      <div ref={statusBarRef} />
+      <div ref={editorRef} style={{ height: '60vh', width: '90vh' }} />
+      <div
+        style={{ textAlign: 'center', fontWeight: 'bold' }}
+        ref={statusBarRef}
+      />
+      <button onClick={() => console.log(editor?.getValue())}>
+        log the text
+      </button>
     </div>
   );
 }

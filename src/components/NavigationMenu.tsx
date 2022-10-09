@@ -12,6 +12,7 @@ function NavigationMenu() {
 
   const authedItems = [
     { label: <Link to="/">Home</Link>, key: 'home' },
+    { label: <Link to={'/posts/create'}>Posts</Link>, key: 'posts' },
     {
       label: <Link to="#">Account</Link>,
       key: 'account',

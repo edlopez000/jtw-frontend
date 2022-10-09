@@ -9,9 +9,11 @@ import Login from './components/Login';
 import SignupForm from './components/SignupForm';
 import NotFound from './pages/NotFound';
 import PasswordReset from './pages/PasswordReset';
+import Posts from './pages/CreatePosts';
 import SplashPage from './pages/SplashPage';
 import UserPage from './pages/UserPage';
 import useAuth, { AuthProvider } from './utils/useAuth';
+import { PostContext } from './utils/PostContext';
 
 function App() {
   const { user, loading, error, signIn, registerUser, setUserInfo } = useAuth();
@@ -34,6 +36,14 @@ function App() {
                   element={
                     <AuthenticatedRoute>
                       <UserPage />
+                    </AuthenticatedRoute>
+                  }
+                />
+                <Route
+                  path="/posts/create"
+                  element={
+                    <AuthenticatedRoute>
+                      <Posts />
                     </AuthenticatedRoute>
                   }
                 />
